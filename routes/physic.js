@@ -42,7 +42,7 @@ router.post('/', function(req, res) {
       let ideal = 0.45;
 
       //max lambda
-      let lambda = 0.1;
+      let lambda = 0.1; //sprosit'
 
       let result = false;
 
