@@ -5,6 +5,8 @@ const request = require('request');
 
 router.post('/', function(req, res) {
 
+   let name = req.body.name;
+
 
    const port = new SerialPort('COM6', {
       baudRate: 9600
@@ -17,12 +19,12 @@ router.post('/', function(req, res) {
          port.write("1");
       }, 2000);
 
-   port.on('data', function (data) {
+   /*port.on('data', function (data) {
       console.log('Data:', data.toString());
       port.close((err) => {
          console.log( 'port closed', err )
       });
-   });
+   });*/
 
    port.on('readable', function () {
       console.log('Data:', port.read());
@@ -33,7 +35,7 @@ router.post('/', function(req, res) {
    res.set('Content-Type', 'text/html');
    res.send({result: "12345"});
    port.on('data', (data) => {
-      //parameters
+      //parameters СПРОСИТЬ!
       let string = '0.' + data.toString();
 
       //control value
@@ -50,15 +52,17 @@ router.post('/', function(req, res) {
       console.log(result);
 
       request({
-            url: 'http://localhost/physic',
+            url: 'http://localhost/physic', //поменять
             method: "POST",
             body: {
-               result: result
+               result: result,
+               name: name
             },
             json: true
          },
          function (error, response, body) {
             console.log('body:', body);
+            res.send(body);
          });
    });
 });

@@ -6,7 +6,8 @@ const request = require('request');
 
 router.post('/:num', function(req, res) {
    let num = req.params.num;
-   console.log(num);
+   let name = req.body.name;
+   console.log(name);
 
    const port = new SerialPort('COM6', {
       baudRate: 9600
@@ -27,7 +28,8 @@ router.post('/:num', function(req, res) {
             url: 'http://localhost/roboto/' + num,
             method: "POST",
             body: {
-               result: result
+               result: result,
+               name: name
             },
             json: true
          },

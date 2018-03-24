@@ -26,7 +26,6 @@ router.post('/:num', function(req, res) {
          function (error, response, body) {
             console.log('body:', body);
             res.send(body);
-
          });
 });
 
